@@ -1,1 +1,1 @@
-#THIS REPOSITORY SOLUTIONS ARE A BIT DIFFERENT FROM OTHER REPOSITORIES
+#Решения здесь несколько отличаются от решений других репозиторий
