@@ -70,16 +70,7 @@ struct Elem *bsort(Elem *list)
 	return list;
 }
 void print(Elem* SingleLinkedList){
-	Elem *freer;
-	Elem* buffer;
-	freer = SingleLinkedList->next;
-	while (freer != NULL) {
-		buffer = freer;
-		printf("%s ", freer->word);
-		free(freer->word);
-		freer = freer->next;
-		free(buffer);
-	}
+
 }
 void revarray(void *base, unsigned long nel, unsigned long width)
 {
@@ -95,10 +86,10 @@ void revarray(void *base, unsigned long nel, unsigned long width)
         }
     }
 }
-void makeZero(char* buf, int j){
+void makeZero(char* buffer, int j){
     int k;
     for (k=0;k<j;k++) {
-        buf[k]=0;
+        buffer[k]=0;
     }
 }
 void getPreviousWord(char* src, int index, Elem* SingleLinkedList){
@@ -131,16 +122,29 @@ void getWordsSingleLinkedList(char *s,  Elem* SingleLinkedList)
     }
 
 }
-
-int main() {
-	char *input = (char *)calloc(1000000, sizeof(char));
-	Elem* SingleLinkedList = InitSingleLinkedList("");
-	fgets(input, 1000000, stdin);
+void SingleLinkedListOperating(){
+    char *input = (char *)calloc(1000000, sizeof(char));
+    Elem* SingleLinkedList = InitSingleLinkedList("");
+    fgets(input, 1000000, stdin);
     getWordsSingleLinkedList(input,SingleLinkedList);
-	free(input);
-	bsort(SingleLinkedList);
-	print(SingleLinkedList);
-	free(SingleLinkedList->word);
-	free(SingleLinkedList);
+    free(input);
+    bsort(SingleLinkedList);
+    Elem *element;
+    Elem* buffer;
+    element = SingleLinkedList->next;
+    while (element) {
+        printf("%s ", element->word);
+        buffer = element;
+        free(element->word);
+        free(buffer);
+        element = element->next;
+
+    }
+    free(element);
+    free(SingleLinkedList->word);
+    free(SingleLinkedList);
+}
+int main() {
+    SingleLinkedListOperating();
 	return 0;
 }
