@@ -102,8 +102,9 @@ void getPreviousWord(char* src, int index, Elem* SingleLinkedList){
         index--;
         counter++;
     }
-    revarray((void *) output, strlen(output), sizeof output[0]);
     int strl = strlen(output);
+    revarray((void *) output, strl, sizeof output[0]);
+    
     for(int i = 0; i < strl; i++) {
         if(output[i]!= '\n')
             final[i] = output[i];
@@ -123,9 +124,9 @@ void getWordsSingleLinkedList(char *s,  Elem* SingleLinkedList)
 
 }
 void SingleLinkedListOperating(){
-    char *input = (char *)calloc(1000000, sizeof(char));
+    char *input = (char *)calloc(10000000, sizeof(char));
     Elem* SingleLinkedList = InitSingleLinkedList("");
-    fgets(input, 1000000, stdin);
+    fgets(input, 10000000, stdin);
     getWordsSingleLinkedList(input,SingleLinkedList);
     free(input);
     bsort(SingleLinkedList);
