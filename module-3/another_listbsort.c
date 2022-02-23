@@ -7,8 +7,8 @@ typedef struct Elem Elem;
 typedef struct SLL SLL;
 
 struct Elem {
-	struct Elem *next;
-	char *word;
+    struct Elem *next;
+    char *word;
 };
 void cpy(void *a, void *b, int n) {
     unsigned char *A = (unsigned char *) a, *B = (unsigned char *) b;
@@ -16,27 +16,27 @@ void cpy(void *a, void *b, int n) {
 }
 Elem* InitSingleLinkedList(const char* initializer) {
 
-	Elem* SingleLinkedListSingleElement = malloc(sizeof(Elem));
-	SingleLinkedListSingleElement->word = (char *)calloc(1000, sizeof(char));
-	cpy(SingleLinkedListSingleElement->word, (void*) initializer, strlen(initializer));
-	SingleLinkedListSingleElement->next = NULL;
-	return SingleLinkedListSingleElement;
+    Elem* SingleLinkedListSingleElement = malloc(sizeof(Elem));
+    SingleLinkedListSingleElement->word = (char *)calloc(1000, sizeof(char));
+    cpy(SingleLinkedListSingleElement->word, (void*) initializer, strlen(initializer));
+    SingleLinkedListSingleElement->next = NULL;
+    return SingleLinkedListSingleElement;
 }
 
 void InsertBeforeHead(Elem* list, Elem* add) {
-	Elem *y;
+    Elem *y;
     y = list;
-	while (y->next) {
-		y = y->next;
-	}
-	y->next= add;
+    while (y->next) {
+        y = y->next;
+    }
+    y->next= add;
 }
 
 void swap(Elem *head, Elem* after)
 {
-	char *buffer = head->word;
-	head->word = after->word;
-	after->word = buffer;
+    char *buffer = head->word;
+    head->word = after->word;
+    after->word = buffer;
 }
 int compareCurrentWordAndNextWord (Elem* current){
     return (strlen(current->word) > strlen(current->next->word));
@@ -51,27 +51,25 @@ struct Elem *bsort(Elem *list)
         len++;
         x = x->next;
     }
-	int t = len - 1;
-	while (t > 0)
-	{
-		int bound = t;
-		c = list;
-		int i = 0;
-		t = 0;
-		while (i < bound) {
-			if (compareCurrentWordAndNextWord(c)) {
-				swap(c, c->next);
-				t = i;
-			}
-			i++;
-			c = c->next;
-		}
-	}
-	return list;
+    int t = len - 1;
+    while (t > 0)
+    {
+        int bound = t;
+        c = list;
+        int i = 0;
+        t = 0;
+        while (i < bound) {
+            if (compareCurrentWordAndNextWord(c)) {
+                swap(c, c->next);
+                t = i;
+            }
+            i++;
+            c = c->next;
+        }
+    }
+    return list;
 }
-void print(Elem* SingleLinkedList){
 
-}
 void revarray(void *base, unsigned long nel, unsigned long width)
 {
     int i,j;
@@ -104,12 +102,13 @@ void getPreviousWord(char* src, int index, Elem* SingleLinkedList){
     }
     int strl = strlen(output);
     revarray((void *) output, strl, sizeof output[0]);
-    
+
     for(int i = 0; i < strl; i++) {
         if(output[i]!= '\n')
             final[i] = output[i];
     }
     makeZero(output, strl);
+
     Elem *x = InitSingleLinkedList(final);
     InsertBeforeHead(SingleLinkedList, x);
 }
@@ -118,13 +117,14 @@ void getWordsSingleLinkedList(char *s,  Elem* SingleLinkedList)
     int i;
     for(i = 0; i < strlen(s) + 1; ++i){
         if((s[i]== ' ') || (s[i] == '\0')){
+
             getPreviousWord(s, i-1, SingleLinkedList);
         }
     }
 
 }
 void SingleLinkedListOperating(){
-    char *input = (char *)calloc(10000000, sizeof(char));
+    char *input = (char *)calloc(1000000, sizeof(char));
     Elem* SingleLinkedList = InitSingleLinkedList("");
     fgets(input, 10000000, stdin);
     getWordsSingleLinkedList(input,SingleLinkedList);
@@ -137,9 +137,8 @@ void SingleLinkedListOperating(){
         printf("%s ", element->word);
         buffer = element;
         free(element->word);
-        free(buffer);
         element = element->next;
-
+        free(buffer);
     }
     free(element);
     free(SingleLinkedList->word);
@@ -147,5 +146,5 @@ void SingleLinkedListOperating(){
 }
 int main() {
     SingleLinkedListOperating();
-	return 0;
+    return 0;
 }
